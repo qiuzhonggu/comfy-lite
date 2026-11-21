@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "spec": {
+    "id": "canvas-context-menu",
+    "kind": "interactive",
+    "goal": "Add an image card, duplicate it from its right-click menu and delete the copy",
+    "requirementIndexes": [
+      9,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "acceptanceCriteriaIndexes": [
+      7
+    ],
+    "steps": [
+      "Press 新建画布 to create a canvas",
+      "Press 生图 in the 添加卡片 toolbar",
+      "Right-click the 生图-1 card",
+      "Press 复制副本",
+      "Right-click the 生图-2 card",
+      "Press 删除"
+    ],
+    "checks": [
+      {
+        "afterStep": 0,
+        "expectText": "这块画布还是空的"
+      },
+      {
+        "afterStep": 1,
+        "expectText": "生图-1"
+      },
+      {
+        "afterStep": 1,
+        "expectText": "尚未添加任何生图模型。"
+      },
+      {
+        "afterStep": 2,
+        "expectText": "复制副本"
+      },
+      {
+        "afterStep": 3,
+        "expectText": "生图-2"
+      },
+      {
+        "afterStep": 3,
+        "expectText": "生图-1"
+      },
+      {
+        "afterStep": 4,
+        "expectText": "复制副本"
+      },
+      {
+        "afterStep": 5,
+        "expectNoText": "生图-2"
+      },
+      {
+        "afterStep": 5,
+        "expectText": "生图-1"
+      }
+    ]
+  }
+}

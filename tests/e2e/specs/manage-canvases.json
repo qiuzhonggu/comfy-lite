@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "spec": {
+    "id": "manage-canvases",
+    "kind": "interactive",
+    "goal": "The sample canvas is listed; rename it from the list, reopen it and see the new name (canvasStore.ts:135 stale rename), then delete it after confirming",
+    "requirementIndexes": [],
+    "acceptanceCriteriaIndexes": [],
+    "steps": [
+      "Open 示例分镜画布",
+      "Go back to the canvas list",
+      "Rename 示例分镜画布 to 第一幕分镜 and save",
+      "Open 第一幕分镜",
+      "Go back to the canvas list",
+      "Delete 第一幕分镜 and confirm"
+    ],
+    "checks": [
+      {
+        "afterStep": 0,
+        "expectText": "提示词"
+      },
+      {
+        "afterStep": 1,
+        "expectText": "示例分镜画布"
+      },
+      {
+        "afterStep": 2,
+        "expectText": "第一幕分镜"
+      },
+      {
+        "afterStep": 3,
+        "expectText": "第一幕分镜"
+      },
+      {
+        "afterStep": 3,
+        "expectNoText": "示例分镜画布"
+      },
+      {
+        "afterStep": 4,
+        "expectText": "第一幕分镜"
+      },
+      {
+        "afterStep": 5,
+        "expectNoText": "第一幕分镜"
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "spec": {
+    "id": "relay-settings-error",
+    "kind": "interactive",
+    "goal": "Configure a relay with an unreachable address, keep it after reload, and see a readable error with retry when running the image card",
+    "requirementIndexes": [
+      8
+    ],
+    "acceptanceCriteriaIndexes": [],
+    "steps": [
+      "Open 设置",
+      "Press 新增中转站",
+      "Fill 接口地址 with https://relay.invalid and API Key with sk-test123, and add gpt-image-1 to 生图模型 with 添加",
+      "Reload the page",
+      "Go to the canvas list and open 示例分镜画布",
+      "Press 生成 on the 分镜 1 · 关键帧 card"
+    ],
+    "checks": [
+      {
+        "afterStep": 0,
+        "expectText": "新增中转站"
+      },
+      {
+        "afterStep": 1,
+        "expectText": "接口地址"
+      },
+      {
+        "afterStep": 2,
+        "expectText": "gpt-image-1"
+      },
+      {
+        "afterStep": 3,
+        "expectText": "gpt-image-1"
+      },
+      {
+        "afterStep": 4,
+        "expectText": "分镜 1 · 关键帧"
+      },
+      {
+        "afterStep": 5,
+        "expectRole": {
+          "role": "button",
+          "name": "重试"
+        }
+      }
+    ]
+  }
+}

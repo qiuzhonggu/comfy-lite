@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "spec": {
+    "id": "ai-panel-toggle-selection",
+    "kind": "interactive",
+    "goal": "The AI panel notices a selected card and can be collapsed and expanded",
+    "requirementIndexes": [
+      10,
+      11,
+      14,
+      15
+    ],
+    "acceptanceCriteriaIndexes": [
+      5
+    ],
+    "steps": [
+      "Press 新建画布 to create a canvas",
+      "Press 提示词 in the 添加卡片 toolbar",
+      "Click the 提示词 card's title to select it",
+      "Press 收起 AI 助手",
+      "Press the AI 助手 button in the header"
+    ],
+    "checks": [
+      {
+        "afterStep": 0,
+        "expectText": "尚未配置对话模型，AI 助手暂不可用。"
+      },
+      {
+        "afterStep": 1,
+        "expectText": "提示词内容"
+      },
+      {
+        "afterStep": 2,
+        "expectText": "已选中 1 个节点"
+      },
+      {
+        "afterStep": 3,
+        "expectNoText": "给 AI 助手的指令"
+      },
+      {
+        "afterStep": 4,
+        "expectText": "给 AI 助手的指令"
+      }
+    ]
+  }
+}

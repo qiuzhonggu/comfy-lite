@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "spec": {
+    "id": "relay-settings-models",
+    "kind": "interactive",
+    "goal": "Add a relay with chat and image models in settings and find them after a reload",
+    "requirementIndexes": [
+      0,
+      1,
+      2,
+      4,
+      5
+    ],
+    "acceptanceCriteriaIndexes": [
+      0,
+      8,
+      9
+    ],
+    "startPath": "/settings",
+    "steps": [
+      "Press 新增中转站",
+      "Type flux-pro into the new relay's 生图模型 field and press 添加",
+      "Type qwen-max into the same relay's 对话模型 field and press 添加",
+      "Reload the page",
+      "Open 设置 from the top navigation"
+    ],
+    "checks": [
+      {
+        "afterStep": 0,
+        "expectText": "接口地址"
+      },
+      {
+        "afterStep": 1,
+        "expectText": "flux-pro"
+      },
+      {
+        "afterStep": 2,
+        "expectText": "qwen-max"
+      },
+      {
+        "afterStep": 3,
+        "expectText": "flux-pro"
+      },
+      {
+        "afterStep": 4,
+        "expectText": "flux-pro"
+      },
+      {
+        "afterStep": 4,
+        "expectText": "qwen-max"
+      }
+    ]
+  }
+}

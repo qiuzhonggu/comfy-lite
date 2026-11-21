@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/Figtree.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer base {
+  /* Darkroom editing bay — dark-first; :root and .dark share the palette */
+  :root,
+  .dark {
+    --font-display: "Bricolage Grotesque", "PingFang SC", "Microsoft YaHei",
+      sans-serif;
+    --font-body: "Figtree", "PingFang SC", "Microsoft YaHei", "Noto Sans SC",
+      sans-serif;
+    --font-mono: "JetBrains Mono", "PingFang SC", monospace;
+    --radius: 0.625rem;
+
+    --background: 0.165 0.006 60;
+    --foreground: 0.93 0.012 80;
+    --card: 0.215 0.007 60;
+    --card-foreground: 0.93 0.012 80;
+    --popover: 0.245 0.008 60;
+    --popover-foreground: 0.93 0.012 80;
+
+    --primary: 0.68 0.19 38;
+    --primary-foreground: 0.16 0.02 40;
+
+    --secondary: 0.27 0.008 60;
+    --secondary-foreground: 0.88 0.012 80;
+    --muted: 0.25 0.007 60;
+    --muted-foreground: 0.66 0.012 70;
+
+    --accent: 0.3 0.03 45;
+    --accent-foreground: 0.93 0.04 60;
+
+    --destructive: 0.64 0.21 25;
+    --destructive-foreground: 0.98 0.005 80;
+
+    --success: 0.72 0.15 150;
+    --success-foreground: 0.16 0.02 150;
+    --warning: 0.8 0.15 80;
+    --warning-foreground: 0.18 0.03 80;
+
+    --border: 0.31 0.008 60;
+    --input: 0.33 0.008 60;
+    --ring: 0.68 0.19 38;
+
+    /* Node-type identity colors (6 card types) */
+    --node-prompt: 0.88 0.07 90;
+    --node-image-ref: 0.74 0.11 190;
+    --node-chat: 0.72 0.11 270;
+    --node-image-gen: 0.68 0.19 38;
+    --node-video: 0.79 0.15 72;
+    --node-voice: 0.74 0.15 150;
+
+    /* Canvas surface */
+    --canvas: 0.145 0.005 60;
+    --canvas-dot: 0.3 0.008 60;
+    --edge: 0.52 0.012 60;
+
+    /* AI assistant panel (right dock) + AI change marker */
+    --panel: 0.19 0.006 60;
+    --panel-header: 0.215 0.007 60;
+    --bubble-user: 0.3 0.03 45;
+    --bubble-ai: 0.235 0.007 60;
+    --ai-mark: 0.68 0.19 38;
+
+    --chart-1: 0.68 0.19 38;
+    --chart-2: 0.74 0.11 190;
+    --chart-3: 0.79 0.15 72;
+    --chart-4: 0.72 0.11 270;
+    --chart-5: 0.74 0.15 150;
+
+    --sidebar: 0.19 0.006 60;
+    --sidebar-foreground: 0.93 0.012 80;
+    --sidebar-primary: 0.68 0.19 38;
+    --sidebar-primary-foreground: 0.16 0.02 40;
+    --sidebar-accent: 0.27 0.008 60;
+    --sidebar-accent-foreground: 0.93 0.012 80;
+    --sidebar-border: 0.31 0.008 60;
+    --sidebar-ring: 0.68 0.19 38;
+
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * {
+    @apply border-border;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  /* Infinite canvas dot grid; set --grid-size / --grid-x / --grid-y from zoom & pan */
+  .canvas-grid {
+    background-color: oklch(var(--canvas));
+    background-image: radial-gradient(
+      oklch(var(--canvas-dot)) 1px,
+      transparent 1.2px
+    );
+    background-size: var(--grid-size, 22px) var(--grid-size, 22px);
+    background-position: var(--grid-x, 0) var(--grid-y, 0);
+  }
+
+  .text-success {
+    color: oklch(var(--success));
+  }
+  .bg-success {
+    background-color: oklch(var(--success));
+  }
+  .text-warning {
+    color: oklch(var(--warning));
+  }
+  .bg-warning {
+    background-color: oklch(var(--warning));
+  }
+
+  /* Node-type identity: sets --node for stripe/dot/port/text helpers */
+  .node-prompt {
+    --node: var(--node-prompt);
+  }
+  .node-image-ref {
+    --node: var(--node-image-ref);
+  }
+  .node-chat {
+    --node: var(--node-chat);
+  }
+  .node-image-gen {
+    --node: var(--node-image-gen);
+  }
+  .node-video {
+    --node: var(--node-video);
+  }
+  .node-voice {
+    --node: var(--node-voice);
+  }
+
+  .node-stripe {
+    box-shadow: inset 0 3px 0 0 oklch(var(--node));
+  }
+  .node-dot {
+    background-color: oklch(var(--node));
+  }
+  .node-text {
+    color: oklch(var(--node));
+  }
+  .node-tint {
+    background-color: oklch(var(--node) / 0.12);
+  }
+  .node-ring {
+    outline: 1.5px solid oklch(var(--node));
+    outline-offset: 2px;
+  }
+
+  .stroke-edge {
+    stroke: oklch(var(--edge));
+  }
+  .stroke-edge-active {
+    stroke: oklch(var(--primary));
+  }
+
+  .surface-float {
+    background-color: oklch(var(--popover) / 0.86);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Right-side AI assistant dock */
+  .bg-panel {
+    background-color: oklch(var(--panel));
+  }
+  .bg-panel-header {
+    background-color: oklch(var(--panel-header));
+  }
+  .bubble-user {
+    background-color: oklch(var(--bubble-user));
+    color: oklch(var(--accent-foreground));
+  }
+  .bubble-ai {
+    background-color: oklch(var(--bubble-ai));
+    color: oklch(var(--foreground));
+  }
+  /* Node just changed by AI: add class for ~1.6s */
+  .ai-touched {
+    animation: ai-flash 1.6s ease-out 1;
+  }
+  @keyframes ai-flash {
+    0% {
+      outline: 2px solid oklch(var(--ai-mark) / 0.9);
+      outline-offset: 3px;
+    }
+    100% {
+      outline: 2px solid oklch(var(--ai-mark) / 0);
+      outline-offset: 6px;
+    }
+  }
+}

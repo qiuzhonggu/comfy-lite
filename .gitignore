@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+dist/
+.mops/
+.old/
+.platform/
+.pnpm-store/
+.cache/
+.icp/
+/deployed/

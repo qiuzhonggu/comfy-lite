@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "spec": {
+    "id": "chat-card",
+    "kind": "interactive",
+    "goal": "Chat in an AI 对话 card through the configured relay and see the reply on the card",
+    "requirementIndexes": [
+      6,
+      7
+    ],
+    "acceptanceCriteriaIndexes": [],
+    "steps": [
+      "Open 设置",
+      "Press 新增中转站",
+      "Fill 接口地址 with https://relay.test and API Key with sk-test123, and add gpt-4o to 对话模型 with 添加",
+      "Open 画布 from the top navigation",
+      "Open 示例分镜画布",
+      "Press AI 对话 in the 添加卡片 toolbar",
+      "Send 你好 from the new AI 对话 card"
+    ],
+    "checks": [
+      {
+        "afterStep": 0,
+        "expectText": "新增中转站"
+      },
+      {
+        "afterStep": 1,
+        "expectText": "接口地址"
+      },
+      {
+        "afterStep": 2,
+        "expectText": "gpt-4o"
+      },
+      {
+        "afterStep": 3,
+        "expectText": "示例分镜画布"
+      },
+      {
+        "afterStep": 4,
+        "expectText": "分镜 1 · 关键帧"
+      },
+      {
+        "afterStep": 5,
+        "expectText": "gpt-4o"
+      },
+      {
+        "afterStep": 6,
+        "expectText": "你好，我是测试回复"
+      }
+    ],
+    "mocks": {
+      "http": [
+        {
+          "url": "https://relay.test/v1/chat/completions",
+          "status": 200,
+          "json": {
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "message": {
+                  "content": "你好，我是测试回复",
+                  "role": "assistant"
+                }
+              }
+            ],
+            "id": "chatcmpl-test",
+            "model": "gpt-4o",
+            "object": "chat.completion"
+          }
+        }
+      ]
+    }
+  }
+}

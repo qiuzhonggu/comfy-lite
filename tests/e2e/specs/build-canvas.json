@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "spec": {
+    "id": "build-canvas",
+    "kind": "interactive",
+    "goal": "Build a canvas from cards and see the setup hint on a runnable card",
+    "requirementIndexes": [
+      9
+    ],
+    "acceptanceCriteriaIndexes": [
+      9
+    ],
+    "steps": [
+      "Press 新建画布",
+      "Add a 提示词 card from the toolbar and type 雨夜咖啡馆 in its 提示词内容 box",
+      "Add a 生图 card from the toolbar",
+      "Drag from the 提示词 card output port to the 生图 card",
+      "Press 放大",
+      "Press 生成 on the 生图 card",
+      "Reload the page"
+    ],
+    "checks": [
+      {
+        "afterStep": 0,
+        "expectText": "这块画布还是空的"
+      },
+      {
+        "afterStep": 1,
+        "expectText": "雨夜咖啡馆"
+      },
+      {
+        "afterStep": 1,
+        "expectNoText": "这块画布还是空的"
+      },
+      {
+        "afterStep": 2,
+        "expectText": "补充描述"
+      },
+      {
+        "afterStep": 3,
+        "expectText": "上游输入 · 1 段文字"
+      },
+      {
+        "afterStep": 4,
+        "expectText": "雨夜咖啡馆"
+      },
+      {
+        "afterStep": 5,
+        "expectNoText": "上游卡片暂无可用内容"
+      },
+      {
+        "afterStep": 5,
+        "assert": "The card shows a message telling the user to fill in the relay on the settings page first"
+      },
+      {
+        "afterStep": 6,
+        "expectText": "雨夜咖啡馆"
+      },
+      {
+        "afterStep": 6,
+        "expectText": "上游输入 · 1 段文字"
+      }
+    ]
+  }
+}
